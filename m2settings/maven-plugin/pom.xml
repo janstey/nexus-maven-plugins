@@ -87,7 +87,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.sonatype.nexus.m2-settings-template</groupId>
+      <groupId>com.sonatype.nexus.plugins</groupId>
       <artifactId>nexus-m2-settings-template-client</artifactId>
     </dependency>
 
@@ -170,8 +170,8 @@
                 <includes>
                   <include>org.sonatype.plexus:plexus-sec-dispatcher</include>
                   <include>org.sonatype.plexus:plexus-cipher</include>
-                  <include>com.sonatype.nexus.m2-settings-template:nexus-m2-settings-template-model</include>
-                  <include>com.sonatype.nexus.m2-settings-template:nexus-m2-settings-template-client</include>
+                  <include>com.sonatype.nexus.plugins:nexus-m2-settings-template-model</include>
+                  <include>com.sonatype.nexus.plugins:nexus-m2-settings-template-client</include>
                   <include>com.sonatype.nexus.usertoken:nexus-usertoken-model</include>
                   <include>com.sonatype.nexus.usertoken:nexus-usertoken-client</include>
                 </includes>
