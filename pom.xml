@@ -52,6 +52,32 @@
     <developerConnection>scm:git:git@github.com:sonatype/nexus-maven-plugins.git</developerConnection>
   </scm>
 
+  <repositories>
+    <repository>
+      <id>rso-private-grid</id>
+      <url>https://repository.sonatype.org/content/groups/sonatype-grid/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>rso-private-grid</id>
+      <url>https://repository.sonatype.org/content/groups/sonatype-grid/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
   <properties>
     <nexus.version>2.6.0-01</nexus.version>
     <maven.version>3.0.4</maven.version>
@@ -368,6 +394,97 @@
       <properties>
         <nexus-plugin.type>jar</nexus-plugin.type>
       </properties>
+    </profile>
+
+    <!--
+    Strict configuration for enforcer to help catch dependency problems.
+    -->
+    <profile>
+      <id>enforce-strict</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-environment</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <!--
+                    Shows when DM and excludes might be incorrect.
+                    -->
+                    <dependencyConvergence/>
+
+                    <!--
+                    Shows where SNAPSHOT dependencies are used.
+                    -->
+                    <requireReleaseDeps>
+                      <failWhenParentIsSnapshot>false</failWhenParentIsSnapshot>
+                    </requireReleaseDeps>
+
+                    <!--
+                    Shows when repository is defined, allow private RSO repo only.
+                    -->
+                    <requireNoRepositories>
+                      <allowedRepositories>
+                        <repository>rso-private-grid</repository>
+                      </allowedRepositories>
+                    </requireNoRepositories>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+    Strict configuration for enforcer for pre-release validation
+    -->
+    <profile>
+      <id>enforce-prerelease</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>enforce-environment</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <!--
+                    Disallow SNAPSHOT dependencies.
+                    -->
+                    <requireReleaseDeps>
+                      <searchTransitive>true</searchTransitive>
+                      <failWhenParentIsSnapshot>true</failWhenParentIsSnapshot>
+                    </requireReleaseDeps>
+
+                    <!--
+                    Disallow SNAPSHOT, RELEASE, LATEST or pinned-SNAPSHOT plugins.
+                    -->
+                    <requirePluginVersions>
+                      <banSnapshots>true</banSnapshots>
+                      <banRelease>true</banRelease>
+                      <banLatest>true</banLatest>
+                      <banTimestamps>true</banTimestamps>
+                    </requirePluginVersions>
+                  </rules>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
 
     <profile>
