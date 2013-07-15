@@ -437,6 +437,9 @@
                       <allowedRepositories>
                         <repository>rso-private-grid</repository>
                       </allowedRepositories>
+                      <allowedPluginRepositories>
+                        <repository>rso-private-grid</repository>
+                      </allowedPluginRepositories>
                     </requireNoRepositories>
                   </rules>
                 </configuration>
