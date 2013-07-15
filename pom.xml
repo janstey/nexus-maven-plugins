@@ -92,6 +92,10 @@
 
     <!-- Disable cobertura, this is picked up from parent and causes serious problems building site docs for these maven-plugins -->
     <cobertura.skip>true</cobertura.skip>
+
+    <!-- reporting section does not inherit report plugin versions, so we use a property to force the version -->
+    <maven-plugin-plugin.version>3.2</maven-plugin-plugin.version>
+
   </properties>
 
   <dependencyManagement>
