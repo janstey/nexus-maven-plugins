@@ -34,9 +34,9 @@
       </dependency>
 
       <dependency>
-        <groupId>com.sonatype.nexus.m2-settings-template</groupId>
+        <groupId>com.sonatype.nexus.plugins</groupId>
         <artifactId>nexus-m2-settings-template-client</artifactId>
-        <version>2.4.0-1</version>
+        <version>${nexus.version}</version>
       </dependency>
 
       <dependency>
