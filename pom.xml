@@ -304,9 +304,10 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
+          <version>${maven-plugin-plugin.version}</version>
           <configuration>
             <!--
-            Works around bug in maven-plugin packaging lifecycle, version 3.2: http://jira.codehaus.org/browse/MNG-5346
+            Works around bug in maven-plugin packaging lifecycle: http://jira.codehaus.org/browse/MNG-5346
             -->
             <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
           </configuration>
